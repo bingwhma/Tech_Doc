@@ -91,9 +91,9 @@ virsh console KVM名称
 raw:裸格式，占用空间大，不支持快照，性能好
 qcow2:qemu copy on write(qemu写时复制，thin)支持快照，性能较raw稍差
 
-qemu-img info                        #查看磁盘信息
-qemu-img convert -f raw -O qcow2 name.raw name.qcow2         #转换格式,支持vmdk
-virsh snapshot-create            #快照
-virsh snapshot-list                  #快照列表,快照直接放在虚拟磁盘中
-virsh snapshot-delete vmname --snapshotname      #删除快照，删除快照文件不会变小
-virsh snapshot-revert vmname      #还原快照
+qemu-img info                        #查看磁盘信息  
+qemu-img convert -f raw -O qcow2 name.raw name.qcow2         #转换格式,支持vmdk  
+virsh snapshot-create            #快照  
+virsh snapshot-list                  #快照列表,快照直接放在虚拟磁盘中  
+virsh snapshot-delete vmname --snapshotname      #删除快照，删除快照文件不会变小  
+virsh snapshot-revert vmname      #还原快照  
