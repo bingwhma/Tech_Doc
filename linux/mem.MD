@@ -4,9 +4,8 @@
 linuxサーバを利用する上で何時も頭を悩ますものの一つが、メモリ利用状況の評価(メモリ利用率)ではないでしょうか。    
 私も悩みます。そこでRHELベースですが、メモリ利用容量/メモリ利用率の評価をどう考えるかということを整理しました。    
 詳細は後述しますが、例えばRHEL7のfreeコマンドとmeminfoの関係を整理するとこんな感じになります。  
-  
-  
-  
+![Image text](https://github.com/bingwhma/Tech_Doc/blob/main/linux/rhel7.png)  
+
 ちなみにlinuxのメモリ解説＆meminfoをどのように見ればいいかは、e.nakaiさんのページが参考になります。(私のメモリ周辺のバイブル的ページです^^;)  
   
   
@@ -21,7 +20,7 @@ linuxサーバを利用する上で何時も頭を悩ますものの一つが、
 カーネルはプロセスやドライバから新規メモリ(ページ)の確保要求があった時、未使用領域(freeコマンドやmeminfoで言うところのfree領域)から新規割り当てを行います。  
 未使用領域が無い場合、既存のメモリを解放して空きを作り、新なメモリ割当を行います。この「既存メモリの解放処理」は2通りのやり方があり、一つはスワップアウトして空きを作る方法、もう一つはディスク同期してメモリ解放する方法になります。  
 メモリ解放の方式を整理すると、以下の表のようになります。  
-  
+![Image text](https://github.com/bingwhma/Tech_Doc/blob/main/linux/mem2.JPG)    
   
 ※1 無名ページ＆ファイルページについては、記事文末を参照。  
 ※2 プロセスのテキスト領域とは、プロセスの実行イメージ(プログラム)を格納するメモリ領域です。  
@@ -56,9 +55,7 @@ linuxサーバを利用する上で何時も頭を悩ますものの一つが、
   
 なので、わざわざmeminfoをみなくても、freeコマンドの結果をちょっと加工すれば利用率をだせるようになりました。  
 ## 【freeコマンドとmeminfoの図解】  
-  
-TODO  
-  
+![Image text](https://github.com/bingwhma/Tech_Doc/blob/main/linux/rhel7_2.png)  
   
 ## 【計算方法】  
 freeコマンドの結果をawkで処理させています。  
@@ -143,8 +140,7 @@ RHEL6時代までのfreeコマンドでは、バッファ＆キャッシュ領�
         https://www.linuxfoundation.jp/jp_uploads/seminar20090225/kosaki.pdf  
   
 ## freeコマンドとmeminfoの図解  
-  
-TODO  
+![Image text](https://github.com/bingwhma/Tech_Doc/blob/main/linux/rhel6.png)   
   
 【計算方法】  
   
@@ -234,12 +230,10 @@ DirectMap2M:     1040384 kB
         tmpfs --> dfコマンド結果から、tmpfsのusedの容量を足し算する  
         IPC共有メモリ --> "ipcs -u"コマンドの"pages allocated"(共有メモリ様に割り当て済みのページ数)を取得  
   
-【freeコマンドとmeminfoの図解】  
+## 【freeコマンドとmeminfoの図解】  
+![Image text](https://github.com/bingwhma/Tech_Doc/blob/main/linux/rhel5.png)   
   
-TODO  
-  
-【計算方法】  
-  
+## 【計算方法】  
 dfコマンド、"ipcs -u"コマンド、と/proc/meminfoのデータを組み合わせて、awkで計算させています。  
   
 #!/bin/bash  
