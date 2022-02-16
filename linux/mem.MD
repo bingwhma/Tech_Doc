@@ -59,7 +59,8 @@ linuxサーバを利用する上で何時も頭を悩ますものの一つが、
   
 ## 【計算方法】  
 freeコマンドの結果をawkで処理させています。  
-  
+
+```  
 #!/bin/bash  
 export LANG=C, LC_ALL=C  
   
@@ -79,7 +80,7 @@ free | awk '
         printf("used%,total(KB),used(KB),available(KB)\n");  
         printf("%.1f,%d,%d,%d\n",rate,total,used,available);  
     }';  
-  
+```  
 freeコマンド表示例  
 #free  
               total        used        free      shared  buff/cache   available  
@@ -145,7 +146,7 @@ RHEL6時代までのfreeコマンドでは、バッファ＆キャッシュ領�
 【計算方法】  
   
 /proc/meminfoのデータをawkでガリガリ計算させています。  
-  
+```  
 export LANG=C, LC_ALL=C  
   
 awk '  
@@ -164,7 +165,7 @@ awk '
         printf("used%,total(KB),used(KB),available(KB)\n");  
         printf("%.1f,%d,%d,%d\n",rate,total,used,available);  
     }' /proc/meminfo;  
-  
+ ``` 
 freeコマンド表示例  
   
 #free  
@@ -235,7 +236,7 @@ DirectMap2M:     1040384 kB
   
 ## 【計算方法】  
 dfコマンド、"ipcs -u"コマンド、と/proc/meminfoのデータを組み合わせて、awkで計算させています。  
-  
+```  
 #!/bin/bash  
   
 export LANG=C, LC_ALL=C  
@@ -267,14 +268,14 @@ awk -v shmem=${SHMEM} '
         printf("used%,total(KB),used(KB),available(KB)\n");  
         printf("%.1f,%d,%d,%d\n",rate,total,used,available);  
     }' /proc/meminfo;  
-  
+```  
 freeコマンド表示例  
   
 #free  
              total       used       free     shared    buffers     cached  
 Mem:       2058764     313972    1744792          0      19748     165736  
   
-    /+ buffers/cache:     128488    1930276  
+  /+ buffers/cache:     128488    1930276  
   
 Swap:      4095992          0    4095992  
   
