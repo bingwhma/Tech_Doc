@@ -13,6 +13,21 @@ jstat -options
 -gcutil  
 -printcompilation  
 
+## 类加载统计
+命令行输入：jstat -class 70815  
+Loaded  Bytes  Unloaded  Bytes     Time  
+ 3610  6339.0        0     0.0       4.01  
+
+说明  
+    Loaded:加载class的数量  
+    Bytes：所占用空间大小  
+    Unloaded：未加载数量  
+    Bytes:未加载占用空间  
+    Time：时间  
+## 编译统计
+命令行输入：jstat -compiler 70815  
+
+
 jstat -gcutil 692 1000  
   S0     S1     E      O      M     CCS    YGC     YGCT    FGC    FGCT     GCT  
   0.00  41.49  59.79  83.66  89.92  78.74    295    5.436    10    3.855    9.291  
@@ -33,7 +48,6 @@ jstat -gcutil 692 1000
     如果设置了这个参数，说明不能被共享，此时其他进程将访问不了该内存，这样一来，譬如我们jps，jstat等都无法工作。默认这个参数是关闭的，也就是默认支持共享的方式  
 
 # 文件更新
-
 由于这个文件是通过mmap的方式映射到了内存里，而jstat是直接通过DirectByteBuffer的方式从PerfData里读取的，所以只要内存里的值变了，那我们从jstat看到的值就会发生变化，内存里的值什么时候变，  
 取决于-XX:PerfDataSamplingInterval这个参数，默认是50ms，也就是说50ms更新一次值，基本上可以认为是实时的了。  
 PerfData其他相关VM参数  
