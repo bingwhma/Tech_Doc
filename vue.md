@@ -19,7 +19,17 @@ npm run dev
 简写  
 `<div :id="dynamicId"></div>`   
 绑定对象  
-`<div v-bind="objectOfAttrs"></div>`  
+`<div v-bind="objectOfAttrs"></div>`
+
+`<a :href="url"> ... </a>` href 就是一个参数，它告诉 v-bind 指令将表达式 url 的值绑定到元素的 href attribute 上。  
+## 动态参数
+`<a v-bind:[attributeName]="url"> ... </a>`
+`<a :[attributeName]="url"> ... </a>`
+attributeName 会作为一个 JavaScript 表达式被动态执行，计算得到的值会被用作最终的参数。举例来说，如果你的组件实例有一个数据属性 attributeName，其值为 "href"，那么这个绑定就等价于 v-bind:href。
+
+下例中当 eventName 的值是 "focus" 时，v-on:[eventName] 就等价于 v-on:focus  
+`<a v-on:[eventName]="doSomething"> ... </a>`  
+`<a @[eventName]="doSomething">`  
 
 ## 修饰符 Modifiers 
 ### 事件修饰符
