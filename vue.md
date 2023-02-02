@@ -62,3 +62,14 @@ attributeName 会作为一个 JavaScript 表达式被动态执行，计算得到
 ### element的修饰符
 对于elementUI的input，我们需要在后面加上.native, 因为elementUI对input进行了封装，原生的事件不起作用。
 
+# VUE router
+npm install vue-router --save   导入   
+## 功能
+  支持历史模式 hash模式  
+  嵌套路由  
+  路由参数 Query Param 
+  编程式路由  
+  命名路由  
+
+`<router-link to='/aaa'><router-link>`
+`<router-view></router-view>`
