@@ -104,3 +104,30 @@ const response = axios.get(`/api/articles/${articleId}`);
 https://jestjs.io/
 https://www.vuemastery.com/blog/mock-service-worker-api-mocking-for-vuejs-development-testing/
 https://mswjs.io/
+
+其他关联测试
+技术。
+
+    karma 该工具可用于测试所有主流Web浏览器，也可集成到CI（Continuous integration）工具，也可和其他代码编辑器一起使用。
+    mocha 前端测试框架，支持node和浏览器端，断言库自由化，注意mocha只提供了测试套件，具体的断言工具还需要在挑选，这里我们选用chai
+    chai 断言库，提供了should，expect，assert多种断言。
+    istanbul javascript代码覆盖率工具，用来导出代码覆盖率数据。
+
+需要安装的包名如下：
+
+    karma：提供测试所需的浏览器环境、监测代码改变自动重测、整合持续集成等功能
+    mocha：测试框架，运行测试
+    chai：断言库，提供多种断言，与测试框架配合使用
+    sinon：测试辅助工具，提供 spy、stub、mock 三种测试手段，帮助捏造特定场景
+    karma-webpack：karma 中的 webpack 插件
+    karma-mocha：karma 中的 mocha 插件
+    karma-sinon-chai：karma 中的 sinon-chai 插件
+    sinon-chai：karma 中的 chai 插件
+    karma-sourcemap-loader：karma 中的 sourcemap 插件
+    karma-chrome-launcher：karma 中的模拟chrom插件
+    karma-spec-reporter：在终端输出测试结果
+    babel-plugin-istanbul：babel插件，es6代码产生instanbul覆盖率
+    karma-coverage：Karma插件，生成代码覆盖率
+
+链接：https://www.jianshu.com/p/9ebc330af4ee
+
