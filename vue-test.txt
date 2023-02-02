@@ -1,0 +1,106 @@
+# 依赖lib  
+$npm install  @vue/unit-jest  
+$npm install  @vue/e2e-cypress  
+
+// counter.js  
+export default {  
+  template: `
+    <div>
+      <span class="count">{{ count }}</span>
+      <button @click="increment">Increment</button>
+    </div>
+  `,
+  data() {
+    return {
+      count: 0
+    }
+  },
+  methods: {
+    increment() {
+      this.count++
+    }
+  }
+}
+  
+// sum.js  
+function sum(a, b) {  
+  return a + b;  
+}  
+module.exports = sum;  
+
+# UI界面数据确认
+import { mount } from '@vue/test-utils'
+import Counter from './counter'
+
+describe('Counter', () => {
+  // 现在挂载组件，你便得到了这个包裹器
+  const wrapper = mount(Counter)
+
+  it('renders the correct markup', () => {
+    expect(wrapper.html()).toContain('<span class="count">0</span>')
+  })
+
+  // 也便于检查已存在的元素
+  it('has a button', () => {
+    expect(wrapper.contains('button')).toBe(true)
+  })
+})
+
+# 模拟事件
+it('button click should increment the count', () => {
+  expect(wrapper.vm.count).toBe(0)
+  const button = wrapper.find('button')
+  button.trigger('click')
+  expect(wrapper.vm.count).toBe(1)
+})
+
+# 模拟逻辑测试：
+const sum = require('./sum');
+it('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
+});
+
+# 模拟服务器数据(使用msw)
+// 安装依赖
+$npm install  msw 
+​
+// mock 示例代码
+import { rest } from "msw";
+const articles = [
+    {
+        id: 1,
+        title: "Node.js 日志最佳实践指南",
+        content:
+            "测试1",
+        url: "https://juejin.cn/post/7017811851345920037",
+    },
+    {
+        id: 2,
+        title: "NodeJs 全栈创建多文件断点续传",
+        content:
+            "测试2",
+        url: "https://juejin.cn/post/7015935144007729189",
+    }
+];
+export const handlers = [
+    rest.get(`/api/articles/:id`, (req, res, ctx) => {
+        const { id } = req.params;
+        const data = articles.find((item) => item.id === parseInt(id, 10));
+        if (data) {
+            return res(ctx.status(200), ctx.json(data));
+        } else {
+            return res(ctx.status(500));
+        }
+    }),
+];
+
+export const defaultHandlers = [];
+
+// 调用
+const response = axios.get(`/api/articles/${articleId}`);
+
+
+参考：
+https://jestjs.io/
+https://www.vuemastery.com/blog/mock-service-worker-api-mocking-for-vuejs-development-testing/
+https://mswjs.io/
