@@ -1,4 +1,4 @@
-# CountDownLatch  等待线程接受
+# CountDownLatch  等待线程结束
 等待多线程完成的CountDownLatch
 
 CountDownLatch允许一个或多个线程等待其他线程完成操作。
